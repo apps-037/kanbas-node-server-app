@@ -1,49 +1,43 @@
+
 import express from "express";
 import Hello from "./Hello.js";
 import Lab5 from "./Lab5/index.js";
 import cors from "cors";
+import session from "express-session";
 import UserRoutes from "./Kanbas/Users/routes.js";
 import CourseRoutes from "./Kanbas/Courses/routes.js";
-import EnrollmentRoutes from "./Kanbas/Enrollments/routes.js";
-import "dotenv/config";
-import session from "express-session";
 import ModuleRoutes from "./Kanbas/Modules/routes.js";
+import EnrollmentRoutes from "./Kanbas/Enrollments/routes.js";
 import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
-
+import "dotenv/config";
 const app = express();
-
 app.use(
-  cors({
-    credentials: true,
-    origin: process.env.NETLIFY_URL || "http://localhost:3000",
-  })
-);
-
+    cors({
+        credentials: true,
+        origin: process.env.NETLIFY_URL || "http://localhost:3000",
+    })
+); // make sure cors is used right after creating the app
 const sessionOptions = {
-  secret: process.env.SESSION_SECRET || "kanbas",
-  resave: false,
-  saveUninitialized: false,
+    secret: process.env.SESSION_SECRET || "kanbas",
+    resave: false,
+    saveUninitialized: false,
 };
 if (process.env.NODE_ENV !== "development") {
-  sessionOptions.proxy = true;
-  sessionOptions.cookie = {
-    sameSite: "none",
-    secure: true,
-    domain: process.env.NODE_SERVER_DOMAIN,
-    maxAge: 24 * 60 * 60 * 1000 ,
-    httpOnly:true
-  };
+    sessionOptions.proxy = true;
+    sessionOptions.cookie = {
+        sameSite: "none",
+        secure: true,
+        domain: process.env.NODE_SERVER_DOMAIN,
+    };
 }
-
-
-
 app.use(session(sessionOptions));
 app.use(express.json());
-Hello(app);
-Lab5(app);
 UserRoutes(app);
 CourseRoutes(app);
-EnrollmentRoutes(app);
 ModuleRoutes(app);
+EnrollmentRoutes(app);
 AssignmentRoutes(app);
+Lab5(app);
+Hello(app);
 app.listen(process.env.PORT || 4000);
+
