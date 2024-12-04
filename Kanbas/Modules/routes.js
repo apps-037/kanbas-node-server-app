@@ -11,4 +11,10 @@ export default function ModuleRoutes(app) {
     modulesDao.updateModule(moduleId, moduleUpdates);
     res.sendStatus(204);
   });
+  app.post("/api/modules/:moduleId", (req,res) => {
+    const { moduleId } = req.params;
+    const modulesName = req.body;
+    modulesDao.createModule(moduleId, modulesName);
+    res.sendStatus(204);
+  });
 }
