@@ -8,6 +8,7 @@ import "dotenv/config";
 import session from "express-session";
 import ModuleRoutes from "./Kanbas/Modules/routes.js";
 import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
+import QuizzesRoutes from "./Kanbas/Quizzes/routes.js";
 import "dotenv/config";
 import mongoose from "mongoose";
 
@@ -18,7 +19,7 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: process.env.NETLIFY_URL || "http://localhost:3000",
+    origin: process.env.NETLIFY_URL || "http://localhost:3000" || "http://localhost:3001",
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
@@ -49,4 +50,5 @@ UserRoutes(app);
 CourseRoutes(app);
 ModuleRoutes(app);
 AssignmentRoutes(app);
+QuizzesRoutes(app);
 app.listen(process.env.PORT || 4000);
