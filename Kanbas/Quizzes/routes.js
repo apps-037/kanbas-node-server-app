@@ -20,12 +20,32 @@ export default function QuizzesRoutes(app) {
     const quiz = await quizDao.getQuizById(quizId);
     res.json(quiz);
   });
+
+  app.post("/api/quizzes/:quizId", async(req, res) => {
+    const { quizId } = req.params;
+    const quizUpdates = req.body;
+    const quiz = await quizDao.updateQuizById(quizId, quizUpdates);
+    res.json(quiz);
+  });
+
   app.post("/api/quizzes/:quizId/questions", async(req, res) => {
     const { quizId } = req.params;
     const question = req.body;
 
     try {
-        const updatedQuiz = await createQuizQuestions(quizId, question);
+        const updatedQuiz = await quizDao.createQuizQuestions(quizId, question);
+        res.status(200).json(updatedQuiz);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+  });
+
+  app.put("/api/quizzes/:quizId/updateAllQuestions", async(req, res) => {
+    const { quizId } = req.params;
+    const questions = req.body;
+
+    try {
+        const updatedQuiz = await quizDao.createQuizQuestions(quizId, question);
         res.status(200).json(updatedQuiz);
     } catch (error) {
         res.status(400).json({ error: error.message });

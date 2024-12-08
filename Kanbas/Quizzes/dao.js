@@ -32,3 +32,7 @@ export async function createQuizQuestions(quizId, question) {
         throw new Error(`Failed to add question: ${error.message}`);
     }
 }
+
+export function updateQuizById(quizId, quizUpdates) {
+    return model.updateOne({ _id: quizId }, quizUpdates);
+  }
