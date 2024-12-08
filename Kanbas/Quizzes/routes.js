@@ -63,5 +63,11 @@ export default function QuizzesRoutes(app) {
         res.status(400).json({ error: error.message });
     }
   });
+
+  app.delete("/api/quizzes/:quizId/questions/:questionId", async(req,res) => {
+    const { quizId, questionId } = req.params;
+    await quizDao.deleteQuestion(quizId, questionId);
+    res.sendStatus(204);
+  })
 }
 

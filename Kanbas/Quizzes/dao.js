@@ -40,9 +40,18 @@ export function updateQuizById(quizId, quizUpdates) {
 export async function updateQuestion(questionId, question) {
     try {
         // Attempt to update the question
+        const questionToUpdate = {
+            _id: questionId, // Make sure this is unique
+            questionText: question.question,
+            options: question.options,
+            correctOptionIndex: question.correctOptionIndex,
+            title: question.title,
+            points: question.points,
+            type: question.type
+        };
         const result = await model.findOneAndUpdate(
             { "questions._id": questionId }, 
-            { $set: { "questions.$": question } },
+            { $set: { "questions.$": questionToUpdate } },
             { new: true, runValidators: true }
         );
 
@@ -83,4 +92,11 @@ export async function updateQuestion(questionId, question) {
         console.error("Error updating or creating question:", error);
         throw new Error("Failed to update or create question.");
     }
+}
+export function deleteQuestion(quizId, questionId) {
+    return model.findByIdAndUpdate(
+        quizId,
+        { $pull: { questions: { _id: questionId } } },
+        { new: true }
+    );
 }
