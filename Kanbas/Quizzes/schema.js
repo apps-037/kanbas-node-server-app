@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 const questionSchema = new mongoose.Schema({
     questionText: { type: String, required: true },
     options: [{
-        _id: {type: String, required: [true, 'Option ID is required.']},
         option: { type: String, required: [true, 'Option value is required.'],trim: true},
     }],
     correctOptionIndex: { type: Number, required: true },
     title: { type: String, required: true },
     points: { type: Number },
+    type: { type: String, required: true }
 });
 
 const quizSchema = new mongoose.Schema({
