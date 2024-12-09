@@ -29,6 +29,7 @@ const quizSchema = new mongoose.Schema({
     shuffleAnswers: { type: Boolean, default: false },
     timeLimit: Number,
     multipleAttempts: { type: Boolean, default: false },
+    numberOfAttempts: { type: Number, default: 1 },
     viewResponses: {
         type: String,
         enum: ["Always", "AfterGrading", "AfterDueDate"],
