@@ -14,3 +14,7 @@ export async function storeQuizSubmission(studentId, quizId, answers) {
         throw error;
     }
 }
+
+export async function getSubmissionData(quizId) {
+    return await model.find({ quizId: quizId });
+}

@@ -17,4 +17,10 @@ export default function QuizSubmissionRoutes(app) {
             res.status(500).send("Internal server error.");
         }
     });
+
+    app.get("/api/quizzes/:quizId/submission", async(req, res) => {
+        const { quizId } = req.params;
+        const data = await quizSubmissionDao.getSubmissionData(quizId);
+        res.json(data);
+    });
 }
