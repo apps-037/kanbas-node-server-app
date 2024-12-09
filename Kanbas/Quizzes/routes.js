@@ -68,6 +68,6 @@ export default function QuizzesRoutes(app) {
     const { quizId, questionId } = req.params;
     await quizDao.deleteQuestion(quizId, questionId);
     res.sendStatus(204);
-  })
+  });
 }
 

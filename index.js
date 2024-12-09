@@ -9,6 +9,7 @@ import session from "express-session";
 import ModuleRoutes from "./Kanbas/Modules/routes.js";
 import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
 import QuizzesRoutes from "./Kanbas/Quizzes/routes.js";
+import QuizSubmissionRoutes from "./Kanbas/QuizSubmissions/routes.js";
 import "dotenv/config";
 import mongoose from "mongoose";
 
@@ -51,4 +52,5 @@ CourseRoutes(app);
 ModuleRoutes(app);
 AssignmentRoutes(app);
 QuizzesRoutes(app);
+QuizSubmissionRoutes(app);
 app.listen(process.env.PORT || 4000);
