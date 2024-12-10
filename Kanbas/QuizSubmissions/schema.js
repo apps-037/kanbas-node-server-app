@@ -11,23 +11,27 @@ const QuizSubmissionSchema = new mongoose.Schema({
         ref: 'Quiz',
         required: true
     },
-    answers: [
+    attempts: [
         {
-            questionId: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Question',
-                required: true
-            },
-            answer: {
-                type: String,
-                required: true
+            answers: [
+                {
+                    questionId: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'Question',
+                        required: true
+                    },
+                    answer: {
+                        type: String,
+                        required: true
+                    }
+                }
+            ],
+            submittedAt: {
+                type: Date,
+                default: Date.now
             }
         }
-    ],
-    submittedAt: {
-        type: Date,
-        default: Date.now
-    }
-},    { collection: "quizSubmissions" });
+    ]
+}, { collection: "quizSubmissions" });
 
 export default QuizSubmissionSchema;
