@@ -42,7 +42,7 @@ export async function updateQuestion(questionId, question) {
         // Attempt to update the question
         const questionToUpdate = {
             _id: questionId, // Make sure this is unique
-            questionText: question.question,
+            questionText: question.questionText,
             options: question.options,
             correctOptionIndex: question.correctOptionIndex,
             title: question.title,
@@ -64,7 +64,7 @@ export async function updateQuestion(questionId, question) {
         } else {
             const questionToAdd = {
                 _id: questionId, // Make sure this is unique
-                questionText: question.question,
+                questionText: question.questionText,
                 options: question.options,
                 correctOptionIndex: question.correctOptionIndex,
                 title: question.title,
